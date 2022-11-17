@@ -5,15 +5,6 @@ import { AppService } from "./app.service";
 export class AppController {
     constructor(private readonly appService: AppService) {}
 
-    // @Get('/iota')
-    // async getIotaAddress() {
-    //   return this.appService.getIotaAddress();
-    // }
-
-    @Get("/iota")
-    async getIotaAddress() {
-        return this.appService.getIotaAddress();
-    }
     @Get("/atom")
     async getAtomAddress() {
         return this.appService.getAtomAddress();

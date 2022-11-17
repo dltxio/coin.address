@@ -20,53 +20,9 @@ import * as croSdk from "@crypto-com/chain-jslib";
 import * as Algo from "algosdk";
 import { Mnemonic } from "@hashgraph/sdk";
 import { CosmosBufferToAddress, CosmosBufferToPublic } from "./utils";
-import { Bip32Path, Bip39 } from "@iota/crypto.js";
-import {
-    Bech32Helper,
-    Ed25519Address,
-    Ed25519Seed,
-    ED25519_ADDRESS_TYPE,
-    generateBip44Address,
-    SingleNodeClient
-} from "@iota/iota.js";
-import { Converter } from "@iota/util.js";
 
 @Injectable()
 export class AppService {
-    public async getIotaAddress() {
-        const API_ENDPOINT = "https://chrysalis-nodes.iota.org/";
-        const client = new SingleNodeClient(API_ENDPOINT);
-
-        const info = await client.info();
-        const randomMnemonic = Bip39.randomMnemonic();
-        const baseSeed = Ed25519Seed.fromMnemonic(randomMnemonic);
-
-        const addressGeneratorAccountState = {
-            accountIndex: 0,
-            addressIndex: 0,
-            isInternal: false
-        };
-        const path = generateBip44Address(addressGeneratorAccountState);
-
-        const addressSeed = baseSeed.generateSeedFromPath(new Bip32Path(path));
-        const addressKeyPair = addressSeed.keyPair();
-        const indexEd25519Address = new Ed25519Address(
-            addressKeyPair.publicKey
-        );
-        const indexPublicKeyAddress = indexEd25519Address.toAddress();
-        return {
-            address: Bech32Helper.toBech32(
-                ED25519_ADDRESS_TYPE,
-                indexPublicKeyAddress,
-                info.bech32HRP
-            ),
-            path: path,
-            mnemonic: randomMnemonic,
-            seed: Converter.bytesToHex(baseSeed.toBytes()),
-            privateKey: Converter.bytesToHex(addressKeyPair.privateKey),
-            publicKey: Converter.bytesToHex(addressKeyPair.publicKey)
-        };
-    }
     public async getXrpAddress(): Promise<XrpResponse> {
         const mnemonic = bip39.generateMnemonic();
         const seed = bip39.mnemonicToSeedSync(mnemonic);

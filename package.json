@@ -24,8 +24,6 @@
         "@crypto-com/chain-jslib": "^0.0.19",
         "@emurgo/cardano-serialization-lib-nodejs": "^11.0.0",
         "@hashgraph/sdk": "^2.17.1",
-        "@iota/iota.js": "^1.8.6",
-        "@iota/wallet": "^2.0.2-alpha.11",
         "@nestjs/common": "^8.0.0",
         "@nestjs/core": "^8.0.0",
         "@nestjs/platform-express": "^8.0.0",
